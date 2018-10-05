@@ -50,7 +50,11 @@ class SparkServiceProvider extends ServiceProvider
      */
     public function booted()
     {
-        Spark::useStripe()->noCardUpFront()->trialDays(30);
+        Spark::collectBillingAddress();
+        Spark::promotion('coupon-code');
+        //Laravel\Cashier\Cashier::useCurrency('eur', '€');
+        
+        Spark::useStripe()->noCardUpFront()->trialDays(10);
 
         Spark::freePlan()
             ->features([
@@ -64,6 +68,7 @@ class SparkServiceProvider extends ServiceProvider
             ]);
         Spark::plan('Professional Yearly', 'pro-year')
             ->price(199)
+            ->yearly()
             ->features([
                 'First', 'Second', 'Third'
             ]);
