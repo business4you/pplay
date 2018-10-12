@@ -51,7 +51,7 @@ class SparkServiceProvider extends ServiceProvider
     public function booted()
     {
         Spark::collectBillingAddress();
-        Spark::promotion('coupon-code');
+        //Spark::promotion('coupon-code');
         //Laravel\Cashier\Cashier::useCurrency('eur', '€');
         
         Spark::useStripe()->noCardUpFront()->trialDays(10);
